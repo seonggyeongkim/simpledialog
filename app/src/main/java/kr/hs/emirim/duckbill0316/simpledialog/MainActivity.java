@@ -10,11 +10,14 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    String[] items ={"젤리빈","킷켓","롤리팝","마시멜로우"};
+    Button but;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button but=(Button)findViewById(R.id.but_dialog); // 형 변환 후, 아이디와 연결
+        but=(Button)findViewById(R.id.but_dialog); // 형 변환 후, 아이디와 연결
         but.setOnClickListener(this); // 이벤트 핸들러의 객체!
     }
 
@@ -25,10 +28,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
+
         AlertDialog.Builder dialog=new AlertDialog.Builder(this); // this = activity 객체 의미
                                                           //메소드를 통해서 반환 받아도 된다! (activity_main.xml)과 연결!
         dialog.setTitle("First Dialog");
-        dialog.setMessage("This is message part.");
+        //dialog.setMessage("This is message part.");
+        dialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) { //항목을 클릭 했을 때 which에 값이 반환됨!
+                but.setText(items[which]);
+            }
+        }); // 항목을 선택하였을 때 처리 가능하게 연결 함!
         dialog.setIcon(R.drawable.first_icon);
         dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
@@ -38,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         }); //아무런 이동 없을 때, null
+
         dialog.show();
 
     }
