@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     String[] items ={"젤리빈","킷켓","롤리팝","마시멜로우"};
-    //boolean [] checkArr={false,true,false};
+    boolean [] checkArr={false,false,false,false}; //true 일때 체크박스에 표시됨!!
     Button but;
 
     @Override
@@ -40,16 +40,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 but.setText(items[which]);
             }
         }); // 항목을 선택하였을 때 처리 가능하게 연결 함!*/
-        dialog.setSingleChoiceItems(items,0, new DialogInterface.OnClickListener() {
-            /**
-             * This method will be invoked when a button in the dialog is clicked.
-             *
-             * @param dialog The dialog that received the click.
-             * @param which  The button that was clicked (e.g.
-             *               {@link DialogInterface#BUTTON1}) or the position
-             */
-            @Override
+        //dialog.setSingleChoiceItems(items,0, new DialogInterface.OnClickListener() {
+
+            /*@Override
             public void onClick(DialogInterface dialog, int which) {
+                but.setText(items[which]);
+            }
+        });*/
+        dialog.setMultiChoiceItems(items,checkArr, new DialogInterface.OnMultiChoiceClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) { //isChecked : true
                 but.setText(items[which]);
             }
         });
